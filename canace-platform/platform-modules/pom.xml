@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>canace-platform</artifactId>
+        <groupId>com.canace.platform</groupId>
+        <version>1.0.0</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>platform-modules</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>platform-modules-system</module>
+    </modules>
+
+    <dependencies>
+        <!-- 需要使用着两个版本 来引入对应的模块和插件 -->
+        <!-- 插件版本 ${plugins.version} -->
+        <!-- 模块版本 ${modules.version}-->
+
+        <!-- 引入核心模块 -->
+        <!-- <dependency>
+             <groupId>com.platform.boot</groupId>
+             <artifactId>platform-core</artifactId>
+             <version>${project.parent.version}</version>
+         </dependency>-->
+
+        <!-- 整体验证 license 推荐单独的mudules验证 -->
+        <!--<dependency>
+            <groupId>com.canace.platform</groupId>
+            <artifactId>platform-plugins-license</artifactId>
+            <version>${plugins.version}</version>
+        </dependency>-->
+
+    </dependencies>
+</project>

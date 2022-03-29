@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>canace-platform</artifactId>
+        <groupId>com.canace.platform</groupId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>platform-starter</artifactId>
+    <version>${project.parent.version}</version>
+
+    <dependencies>
+        <!-- ———————————————————— 模块 - 开始 ———————————————————— -->
+
+        <dependency>
+            <groupId>com.canace.platform</groupId>
+            <artifactId>platform-modules-system</artifactId>
+            <version>${modules.system.version}</version>
+        </dependency>
+
+
+
+        <!-- ———————————————————— 模块 - 结束 ———————————————————— -->
+
+        <!-- ———————————————————— 工具类 - 开始 ———————————————————— -->
+
+        <!-- ———————————————————— 工具类 - 结束 ———————————————————— -->
+
+    </dependencies>
+
+    <!-- 设置 jitpack.io 插件仓库 -->
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <!-- 编译环境 -->
+    <build>
+        <finalName>canace-${modules.system.version}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <includeSystemScope>true</includeSystemScope>
+                </configuration>
+            </plugin>
+            <!-- 添加 XJar Maven 插件-->
+            <plugin>
+                <groupId>com.github.core-lib</groupId>
+                <artifactId>xjar-maven-plugin</artifactId>
+                <version>4.0.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                        <!--<phase>none</phase>-->
+                        <phase>package</phase>
+                        <configuration>
+                            <includes>
+                                <include>com/platform/**</include>
+                                <include>mapper/*.xml</include>
+                            </includes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,12 @@
+## ---- 开发环境 ---- ##
+# 端口设置
+server:
+  port: 8181
+
+
+# 系统日志
+log:
+  path:  /home/log
+logging:
+  level:
+    root: info

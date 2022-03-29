@@ -1,0 +1,11 @@
+## ---- 开发环境 ---- ##
+# 端口设置
+server:
+  port: 8180
+
+# 系统日志
+logging:
+  file:
+    path: /home
+  level:
+    root: info

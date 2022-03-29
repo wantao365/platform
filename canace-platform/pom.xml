@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!--项目的名称, Maven产生的文档用 -->
+    <name>canace-platform</name>
+    <!--项目主页的URL, Maven产生的文档用 -->
+    <url>https://github.com/wantao365</url>
+    <!-- 描述 -->
+    <description>基于springboot。</description>
+    <!--项目开发者列表 -->
+    <developers>
+        <!--项目开发者的信息 -->
+        <developer>
+            <!--项目开发者的唯一标识符 -->
+            <id>canace</id>
+            <!--项目开发者的全名 -->
+            <name>wan.tao</name>
+            <!--项目开发者的email -->
+            <email>taowan2017@163.com</email>
+            <!--项目开发者的主页的URL -->
+            <!--项目开发者在项目中扮演的角色，角色元素描述了各种角色 -->
+            <roles>
+                <role>Project Manager</role>
+                <role>Architect</role>
+            </roles>
+            <!--项目开发者所属组织 -->
+            <organization>personal</organization>
+        </developer>
+    </developers>
+
+    <!-- 父节点 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.3.3.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <!-- platform 信息 -->
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.canace.platform</groupId>
+    <artifactId>canace-platform</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0</version>
+
+    <!-- 引入 modules -->
+    <modules>
+        <module>platform-plugins</module>
+        <module>platform-modules</module>
+        <module>platform-starter</module>
+    </modules>
+
+    <!-- 全局版本 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <java.version>1.8</java.version>
+        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <skipTests>true</skipTests>
+
+        <captcha.version>1.6.2</captcha.version>
+        <fastjson.version>1.2.47</fastjson.version>
+        <nekohtml.version>1.9.18</nekohtml.version>
+
+        <!-- 插件版本 -->
+        <plugins.version>1.0.0</plugins.version>
+        <!-- 模块版本 -->
+        <modules.version>1.0.0</modules.version>
+        <modules.system.version>1.0.0.20220329.15</modules.system.version>
+    </properties>
+
+    <!-- 包版本管理 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- captcha -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${captcha.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <!-- Fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <!-- Jackson对自动解析JSON和XML格式的支持 -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.jaxrs</groupId>
+            <artifactId>jackson-jaxrs-json-provider</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-xml</artifactId>
+        </dependency>
+
+        <!-- Java语言的HTML扫描器和标签补全器 -->
+        <dependency>
+            <groupId>net.sourceforge.nekohtml</groupId>
+            <artifactId>nekohtml</artifactId>
+            <version>${nekohtml.version}</version>
+        </dependency>
+
+        <!-- ———————————————————— 集成springboot 相关组件 - 开始 ———————————————————— -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!-- actuator 端点监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 热部署 如果使用 Jrebel 忽略就好,如果不使用 Jrebel 则放开 -->
+        <!--
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <optional>true</optional>
+        </dependency>
+        -->
+        <!-- ———————————————————— 集成springboot 相关组件 - 结束 ———————————————————— -->
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+    </dependencies>
+
+    <!-- 远程仓库 -->
+    <repositories>
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun Repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>uk</id>
+            <name>uk Repository</name>
+            <url>http://uk.maven.org/maven2/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>ibiblio</id>
+            <name>ibiblio Repository</name>
+            <url>http://mirrors.ibiblio.org/pub/mirrors/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+
+    <!-- 环境选择 -->
+    <profiles>
+        <profile>
+            <!-- 开发环境 -->
+            <id>dev</id>
+            <properties>
+                <spring.active>dev</spring.active>
+            </properties>
+            <activation>
+                <!-- 设置激活这个配置 -->
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 测试环境 -->
+            <id>test</id>
+            <properties>
+                <spring.active>test</spring.active>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 发布环境 -->
+            <id>prod</id>
+            <properties>
+                <spring.active>prod</spring.active>
+            </properties>
+        </profile>
+    </profiles>
+
+    <!-- 构建 -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- 打包跳过测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+            <!-- 避免font文件的二进制文件格式压缩破坏 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <nonFilteredFileExtensions>
+                        <nonFilteredFileExtension>woff</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>eot</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+                        <nonFilteredFileExtension>svg</nonFilteredFileExtension>
+                    </nonFilteredFileExtensions>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                    <include>**/*.json</include>
+                    <include>**/*.ftl</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+</project>

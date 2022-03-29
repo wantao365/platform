@@ -1,0 +1,214 @@
+# 自定义配置
+platform:
+  # 系统名称
+  system-name: "快速开发平台"
+  # 系统启动时间 为空则默认 真实当前系统启动时间
+  system-starter-time: "2020-09-10 00:00:00"
+  # 证书相关
+  license:
+    # 证书subject
+    subject: wantao
+    # 密钥别称
+    publicAlias: publicCert
+    # 访问秘钥库的密码
+    storePass: public_password1234
+    # 证书生成路径
+    licensePath: D:/Java_Code/other_code/license.lic
+    # 密钥库存储路径
+    publicKeysStorePath: D:/Java_Code/other_code/spring-boot2-license/publicCerts.keystore
+
+# tomcat 配置
+server:
+  tomcat:
+    # Tomcat 工作目录路径
+    #basedir:
+    # Tomcat 编码
+    uri-encoding: UTF-8
+    # 对于 Tomcat 头文件不限制大小
+    max-swallow-size: -1
+  servlet:
+    context-path: /canace
+    ## 专门针对 Controller层接口路径前缀全局配置
+    api:
+      path:
+        global-prefix: /api
+  compression:
+    enabled: true
+    min-response-size: 1024
+    mime-types: application/javascript,application/json,application/xml,text/html,text/xml,text/plain,text/css,image/*
+
+# actuator 暴露端点
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: metrics,httptrace
+
+spring:
+  application:
+    name: canace-platform
+  profiles:
+    #此处由maven的环境选择决定
+    active: "@spring.active@"
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  #静态资源
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/, classpath:/static/, classpath:/public/,file:${platform.web.upload-path}
+  #json 时间戳统一转换
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  #开启aop
+  aop:
+    proxy-target-class: true
+  # 自动注入
+#  autoconfigure:
+#    exclude:
+#      - com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  #
+  #main:
+  #  allow-bean-definition-overriding: true
+  # 缓存配置项
+  cache-conf:
+    # 前缀
+    prefix: platform
+  # 一级缓存 ---- EhCache 配置
+  cache:
+    # 是否启用本地缓存 (默认不启用， 如果业务对于缓存依赖较高可启用本地缓存作为一级缓存)
+    enable: false
+    # 加载配置文件
+    jcache:
+      config: classpath:config/ehcache-platform.xml
+  # 二级缓存  ---- Redis 配置
+  redis:
+    # 开启消息订阅
+    pushsub:
+      enable: true
+    lettuce:
+      pool:
+        max-active: 8   #最大连接数据库连接数,设 0 为没有限制
+        max-idle: 8     #最大等待连接中的数量,设 0 为没有限制
+        max-wait: -1ms  #最大建立连接等待时间。如果超过此时间将接到异常。设为-1表示无限制。
+        min-idle: 0     #最小等待连接中的数量,设 0 为没有限制
+      shutdown-timeout: 100ms
+
+  # 数据库配置
+#  datasource:
+#    # 数据库连接池监控
+#    druid:
+#      web-stat-filter:
+#        enabled: true
+#        url-pattern: /*
+#        exclusions: .js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*
+#
+#    # 多数据源
+#    dynamic:
+#      druid:
+#        # 连接池的配置信息
+#        # 初始化大小，最小，最大
+#        initial-size: 5
+#        min-idle: 5
+#        maxActive: 20
+#        # 配置获取连接等待超时的时间
+#        maxWait: 60000
+#        # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+#        timeBetweenEvictionRunsMillis: 60000
+#        # 配置一个连接在池中最小生存的时间，单位是毫秒
+#        minEvictableIdleTimeMillis: 300000
+#        validationQuery: SELECT 1 FROM DUAL
+#        testWhileIdle: true
+#        testOnBorrow: false
+#        testOnReturn: false
+#        # 打开PSCache，并且指定每个连接上PSCache的大小
+#        poolPreparedStatements: true
+#        maxPoolPreparedStatementPerConnectionSize: 20
+#        # 配置监控统计拦截的 Filter，去掉后监控界面 SQL 无法统计，wall 用于防火墙
+#        filters: stat,wall,slf4j
+#        # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+#        connectionProperties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+
+#mybatis-plus 插件
+#mybatis-plus:
+#  #所有的mapper映射文件
+#  mapper-locations:
+#    - classpath*:com/platform/modules/**/mapper/xml/*.xml
+#  # 实体扫描，多个package 继续往后跟
+#  typeAliasesPackage: com.platform.modules.**.entity
+#  # 实体扫描  BaseEntity 的子类对象
+#  typeAliasesSuperType: com.platform.core.base.entity.BaseEntity
+#  global-config:
+#    # 关闭Banner
+#    banner: false
+#    db-config:
+#      # 主键类型 id-type:
+#      # 数据库ID自增 - auto | 0   未设置主键类型 - none | 1   手动输入ID - input | 2  数字类型唯一ID - assign_id | 3  唯一ID一UUID - assign_uuid | 4
+#      id-type: assign_id
+#      logic-delete-field: deleted  # 全局逻辑删除的实体字段名(since 3.3.0,配置后可以忽略不配置步骤2)
+#      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+#      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+#      # 更新策略 - 防止更新 null 值到数据字段中 空字符串可以更新
+#      # 不要改！！！如果想要非空修改 直接在对应字段上加注解 全局不允许 可空数据修改
+#      update-strategy: not_empty
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    cache-enabled: false
+#    call-setters-on-nulls: true
+
+  # 软防火墙
+  waf:
+    # 开启防护
+    enable: true
+    # 开启XSS 防护
+    xss-filter: true
+    # 开启sql注入防护 (目前用不着sql防护 mybatis-plus就已经很完善了)
+    sql-filter: false
+    # 设置xss防护过滤器的优先级，值越小优先级越高（不要超过 shiroFilter）
+    order: 0
+    # 设置xss防护的url拦截路径
+    url-patterns: "/*"
+    # 排除过滤URL
+    url-exclusion:
+      - "/api/v1/generator/template/insertAndDetail"
+      - "/api/v1/generator/template/updateAndDetail"
+      - "/static/files/"
+      - "/doc.html"
+
+  # 认证
+  auth:
+    # 超级管理员账号
+    super-admin: system
+    # 重置默认密码 密码至少包含大小写字母，数字，且不少于6位
+    # 优先使用 option 缓存， 如果缓存为空则使用配置文件
+    default-pass: Aa123456
+    # Token
+    token:
+      # 默认加密盐值（每个系统需要不一致防止被破解）
+      secret: 53c0e33c9d4c5538969abf2fcf48351d
+      # 有效时间 （分钟） 2小时
+      effective-time: 120
+      # 排除过滤URL
+      url-exclusion:
+        - "/static/files/**"
+        - "/test.html"
+    # 登录设置
+    login:
+      # 续命模式 (开启续命模式后 在有效时间内 访问任意接口 则自动续命)
+      revive-mode: true
+      # 限制登录数量 -1 为无限大
+      limit-count: -1
+      # 限制登录拒绝策略 after为后者 before为前者
+      limit-refuse: after
+      # 失败次数
+      slip-count: 5
+      # 失败N次后弹出验证码 （超过验证码阈值 弹出验证码）
+      slip-verify-count: 3
+      # 失败锁定时间(秒)
+      slip-lock-speed: 300
+
+  # Excel
+  excel:
+    # Excel 最大导出操作数量 防止OOM  -1为无限制
+    export-max-count: 100000
