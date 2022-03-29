@@ -39,7 +39,8 @@
         <!-- 日志文件的格式 -->
         <encoder>
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
-            <charset>UTF-8</charset>
+            <!-- 运行***.jar存在乱码，故注释 -->
+            <!--<charset>UTF-8</charset>-->
         </encoder>
     </appender>
 
