@@ -6,6 +6,6 @@ server:
 # 系统日志
 logging:
   file:
-    path: /home
+    path: D:/home
   level:
     root: info

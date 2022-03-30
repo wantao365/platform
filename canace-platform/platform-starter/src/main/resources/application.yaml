@@ -13,9 +13,9 @@ platform:
     # 访问秘钥库的密码
     storePass: public_password1234
     # 证书生成路径
-    licensePath: D:/Java_Code/other_code/license.lic
+    licensePath: D:/License/license.lic
     # 密钥库存储路径
-    publicKeysStorePath: D:/Java_Code/other_code/spring-boot2-license/publicCerts.keystore
+    publicKeysStorePath: D:/License/publicCerts.keystore
 
 # tomcat 配置
 server:

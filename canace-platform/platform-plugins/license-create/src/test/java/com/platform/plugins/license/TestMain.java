@@ -26,11 +26,11 @@ public class TestMain {
             param.setPrivateAlias("privateKey");
             param.setKeyPass("private_password1234");
             param.setStorePass("public_password1234");
-            param.setLicensePath("D:\\Java_Code\\other_code\\license.lic");
-            param.setPrivateKeysStorePath("D:\\Java_Code\\other_code\\spring-boot2-license\\privateKeys.keystore");
+            param.setLicensePath("D:\\License\\license.lic");
+            param.setPrivateKeysStorePath("D:\\License\\privateKeys.keystore");
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             param.setIssuedTime(sdf.parse("2022-3-25 00:00:01"));
-            param.setExpiryTime(sdf.parse("2022-3-30 13:55:00"));
+            param.setExpiryTime(sdf.parse("2022-3-30 17:05:00"));
             param.setConsumerType("user");
             param.setConsumerAmount(1);
             param.setDescription("测试证书发布");
